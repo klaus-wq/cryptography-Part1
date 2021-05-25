@@ -96,30 +96,11 @@ def xor(a: str, b: str):
         a = a.zfill(len(b))
     elif len(b) > len(a):
         b = b.zfill(len(a))
-    res = ""
-    for i in range(len(a)):
-        if a[i] == '1':
-            if b[i] == '1':
-                res += '0'
-            else:
-                res += '1'
-        if a[i] == '0':
-            if b[i] == '1':
-                res += '1'
-            else:
-                res += '0'
+    res = bin(int(a, 2) ^ int(b, 2))[2:].zfill(len(a))
     return res
 
 def sdvig(str: str, n: int):
     arrTxt = str[n:] + str[:n]
-    # arr = []
-    # for i in range(len(str)):
-    #     arr.append('')
-    # for i in range(len(arr)):
-    #     arr[(i - n) % len(arr)] = str[i]
-    # arrTxt = ''
-    # for i in arr:
-    #     arrTxt += i
     return arrTxt
 
 def substitution(N1:str):
@@ -226,7 +207,6 @@ def GOST_zamena(keys1, text, flag):
             label.config(text='\rОбработка завершена на %3d%%' % progress)
             root.update()
             #print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-            time.sleep(0.01)
         except Exception:
             normal = 1
             pass
@@ -308,7 +288,6 @@ def GOST_gamm(keys1, text, flag, vector_init):
                 label.config(text='\rОбработка завершена на %3d%%' % progress)
                 root.update()
                 # print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-                time.sleep(0.01)
             except Exception:
                 normal = 1
                 pass
