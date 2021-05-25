@@ -20,18 +20,19 @@ def xor(a: str, b: str):
         a = a.zfill(len(b))
     elif len(b) > len(a):
         b = b.zfill(len(a))
-    res = ""
-    for i in range(len(a)):
-        if a[i] == '1':
-            if b[i] == '1':
-                res += '0'
-            else:
-                res += '1'
-        if a[i] == '0':
-            if b[i] == '1':
-                res += '1'
-            else:
-                res += '0'
+    # res = ""
+    # for i in range(len(a)):
+    #     if a[i] == '1':
+    #         if b[i] == '1':
+    #             res += '0'
+    #         else:
+    #             res += '1'
+    #     if a[i] == '0':
+    #         if b[i] == '1':
+    #             res += '1'
+    #         else:
+    #             res += '0'
+    res = bin(int(a, 2) ^ int(b, 2))[2:].zfill(len(a))
     return res
 
 
@@ -208,7 +209,7 @@ def codingDES(block: str, flag: int, keys: list):
         36, 4, 44, 12, 52, 20, 60, 28, 35, 3, 43, 11, 51, 19, 59, 27,
         34, 2, 42, 10, 50, 18, 58, 26, 33, 1, 41, 9, 49, 17, 57, 25,
     ]
-    print(block)
+
     afterInitPerm = initial_permutation(block, __IP, 64)
 
     L0 = afterInitPerm[:32]
@@ -268,7 +269,6 @@ def ECB(keys1, text, flag: int):
             label.config(text='\rОбработка завершена на %3d%%' % progress)
             root.update()
             #print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-            time.sleep(0.01)
         except Exception:
             normal = 1
             pass
@@ -317,7 +317,6 @@ def after_coding(file, block64Int, flag):
     if file == 0:
         if flag != 1:
             numb = block64Int[len(block64Int) - 1]
-            print('n', numb)
             blocksText1 = block64Int
             j = 2
             for i in range(numb-1):
@@ -338,7 +337,6 @@ def after_coding(file, block64Int, flag):
     else:
         if flag != 1:
             numb = block64Int[len(block64Int) - 1]
-            print('n', numb)
             blocksText = block64Int
             j = 2
             for i in range(numb-1):
@@ -410,7 +408,6 @@ def CBC(keys1, text, flag: int, vector_init:str):
 
     if flag == 1:
         progress = 0
-        print('ZASH')
         block64Int = b''
         first_step = xor(blocksBin[0], vector_init)
         block64b = codingDES(first_step, flag, keys)
@@ -427,7 +424,6 @@ def CBC(keys1, text, flag: int, vector_init:str):
                 label.config(text='\rОбработка завершена на %3d%%' % progress)
                 root.update()
                 # print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-                time.sleep(0.01)
             except Exception:
                 normal = 1
                 pass
@@ -438,7 +434,6 @@ def CBC(keys1, text, flag: int, vector_init:str):
                 block64b = block64b[8:]
     else:
         progress = 1
-        print('RASSH')
         block64Int = b''
         first_step = blocksBin[0]
         block64b = xor(vector_init, codingDES(blocksBin[0], flag, keys))
@@ -452,7 +447,6 @@ def CBC(keys1, text, flag: int, vector_init:str):
                 label.config(text='\rОбработка завершена на %3d%%' % progress)
                 root.update()
                 # print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-                time.sleep(0.01)
             except Exception:
                 normal = 1
                 pass
@@ -537,7 +531,6 @@ def CFB(keys1, text, flag: int, vector_init:str):
                 label.config(text='\rОбработка завершена на %3d%%' % progress)
                 root.update()
                 # print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-                time.sleep(0.01)
             except Exception:
                 normal = 1
                 pass
@@ -559,7 +552,6 @@ def CFB(keys1, text, flag: int, vector_init:str):
                 label.config(text='\rОбработка завершена на %3d%%' % progress)
                 root.update()
                 # print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-                time.sleep(0.01)
             except Exception:
                 normal = 1
                 pass
@@ -640,7 +632,6 @@ def OFB(keys1, text, flag: int, vector_init:str):
             label.config(text='\rОбработка завершена на %3d%%' % progress)
             root.update()
             # print('\rОбработка завершена на %3d%%' % progress, end = '', flush = True)
-            time.sleep(0.01)
         except Exception:
             normal = 1
             pass
